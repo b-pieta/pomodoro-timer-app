@@ -37,13 +37,20 @@ startButton.addEventListener('click', () => {
       clearInterval(countdown);
       circle.setAttribute('stroke-dashoffset', circumference);
       startButton.disabled = false;
+      breakButton.disabled = false;
       const audio = new Audio('/bowl.mp3');
       audio.play();
-
   
+    } else if (time < 0) {
+      clearInterval(countdown);
+      time = 25 * 60;
+      timer.textContent = formatTime(time);
+      circle.setAttribute('stroke-dashoffset', circumference);
+      startButton.disabled = false;
     }
   }, 1000);
 });
+
 
 
 stopButton.addEventListener('click', () => {
