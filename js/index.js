@@ -11,124 +11,118 @@ circle.setAttribute('stroke-dasharray', circumference);
 
 // Format the time as MM:SS
 function formatTime(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+	const minutes = Math.floor(time / 60);
+	const seconds = time % 60;
+	return `${minutes.toString().padStart(2, '0')}:${seconds
+		.toString()
+		.padStart(2, '0')}`;
 }
 
 let time = 25 * 60;
 timer.textContent = formatTime(time);
 
-
 let countdown;
 startButton.addEventListener('click', () => {
-  countdown = setInterval(() => {
-    time--;
-    
-    timer.textContent = formatTime(time);
-    
-    // Calculate the progress on the circle
-    const dashoffset = circumference * (1 - time / (25 * 60));
+	countdown = setInterval(() => {
+		time--;
 
-    circle.setAttribute('stroke-dashoffset', dashoffset);
-    startButton.disabled = true;
-    
-    if (time === 0) {
-      clearInterval(countdown);
-      circle.setAttribute('stroke-dashoffset', circumference);
-      startButton.disabled = false;
-      breakButton.disabled = false;
-      const audio = new Audio('/bowl.mp3');
-      audio.play();
-  
-    } else if (time < 0) {
-      clearInterval(countdown);
-      time = 25 * 60;
-      timer.textContent = formatTime(time);
-      circle.setAttribute('stroke-dashoffset', circumference);
-      startButton.disabled = false;
-    }
-  }, 1000);
+		timer.textContent = formatTime(time);
+
+		// Calculate the progress on the circle
+		const dashoffset = circumference * (1 - time / (25 * 60));
+
+		circle.setAttribute('stroke-dashoffset', dashoffset);
+		startButton.disabled = true;
+
+		if (time === 0) {
+			clearInterval(countdown);
+			circle.setAttribute('stroke-dashoffset', circumference);
+			startButton.disabled = false;
+			breakButton.disabled = false;
+			const audio = new Audio('/bowl.mp3');
+			audio.play();
+		} else if (time < 0) {
+			clearInterval(countdown);
+			time = 25 * 60;
+			timer.textContent = formatTime(time);
+			circle.setAttribute('stroke-dashoffset', circumference);
+			startButton.disabled = false;
+		}
+	}, 1000);
 });
 
-
-
 stopButton.addEventListener('click', () => {
-  clearInterval(countdown);
-  startButton.disabled = false;
-  breakButton.disabled = false;
+	clearInterval(countdown);
+	startButton.disabled = false;
+	breakButton.disabled = false;
 });
 
 breakButton.addEventListener('click', () => {
-  clearInterval(countdown);
-  time = 5*60;
-  timer.textContent = formatTime(time);
+	clearInterval(countdown);
+	time = 5 * 60;
+	timer.textContent = formatTime(time);
 
-  countdown = setInterval(() => {
-    startButton.disabled = true;
-    breakButton.disabled = true;
-    stopButton.disabled = true;
-    repeatButton.disabled = false;
+	countdown = setInterval(() => {
+		startButton.disabled = true;
+		breakButton.disabled = true;
+		stopButton.disabled = true;
+		repeatButton.disabled = false;
 
-    time--;
-    
-    timer.textContent = formatTime(time);
-    
+		time--;
 
-    const dashoffset = circumference * (1 - time / (5 * 60));
-    circle.setAttribute('stroke-dashoffset', dashoffset);
+		timer.textContent = formatTime(time);
 
-    if (time === 0) {
-      clearInterval(countdown);
-      circle.setAttribute('stroke-dashoffset', circumference);
-      startButton.disabled = false;
-      circle.setAttribute('stroke-dasharray', circumference);
-      const audio = new Audio('/bowl.mp3');
-  audio.play();
-    }
+		const dashoffset = circumference * (1 - time / (5 * 60));
+		circle.setAttribute('stroke-dashoffset', dashoffset);
 
-  }, 1000);
+		if (time === 0) {
+			clearInterval(countdown);
+			circle.setAttribute('stroke-dashoffset', circumference);
+			startButton.disabled = false;
+			circle.setAttribute('stroke-dasharray', circumference);
+			const audio = new Audio('/bowl.mp3');
+			audio.play();
+		}
+	}, 1000);
 
-  // Reset the stroke to full circle
-  circle.setAttribute('stroke-dashoffset', circumference);
+	// Reset the stroke to full circle
+	circle.setAttribute('stroke-dashoffset', circumference);
 });
 
 repeatButton.addEventListener('click', () => {
-  // Reset the time and timer element
-  startButton.disabled = false;
-  breakButton.disabled = false;
-  stopButton.disabled = false;
-  clearInterval(countdown);
+	// Reset the time and timer element
+	startButton.disabled = false;
+	breakButton.disabled = false;
+	stopButton.disabled = false;
+	clearInterval(countdown);
 
-  time = 25 * 60;
-  timer.textContent = formatTime(time);
-  
-  // Calculate the progress on the circle based on remaining time
-  const dashoffset = circumference * (1 - time / (25 * 60));
-  circle.setAttribute('stroke-dashoffset', dashoffset);
-  circle.setAttribute('stroke-dasharray', circumference);
+	time = 25 * 60;
+	timer.textContent = formatTime(time);
 
-  countdown = setInterval(() => {
-    startButton.disabled=true;
-    breakButton.disabled=true;
-    time--;
-    timer.textContent = formatTime(time);
+	// Calculate the progress on the circle based on remaining time
+	const dashoffset = circumference * (1 - time / (25 * 60));
+	circle.setAttribute('stroke-dashoffset', dashoffset);
+	circle.setAttribute('stroke-dasharray', circumference);
 
-    const dashoffset = circumference * (1 - time / (25 * 60));
-    circle.setAttribute('stroke-dashoffset', dashoffset);
+	countdown = setInterval(() => {
+		startButton.disabled = true;
+		breakButton.disabled = true;
+		time--;
+		timer.textContent = formatTime(time);
 
-    if (time === 0) {
-      clearInterval(countdown);
-      circle.setAttribute('stroke-dashoffset', circumference);
-      startButton.disabled = false;
-      circle.setAttribute('stroke-dasharray', circumference);
-      const audio = new Audio('/bowl.mp3');
-      audio.play();
-    }
-  }, 1000);
+		const dashoffset = circumference * (1 - time / (25 * 60));
+		circle.setAttribute('stroke-dashoffset', dashoffset);
+
+		if (time === 0) {
+			clearInterval(countdown);
+			circle.setAttribute('stroke-dashoffset', circumference);
+			startButton.disabled = false;
+			circle.setAttribute('stroke-dasharray', circumference);
+			const audio = new Audio('/bowl.mp3');
+			audio.play();
+		}
+	}, 1000);
 });
-
-
 
 //music section
 
@@ -137,11 +131,11 @@ const audio = document.getElementById('my-audio');
 let isPlaying = false;
 
 playMusicBtn.addEventListener('click', () => {
-  if (isPlaying) {
-    audio.pause();
-    isPlaying = false;
-  } else {
-    audio.play();
-    isPlaying = true;
-  }
+	if (isPlaying) {
+		audio.pause();
+		isPlaying = false;
+	} else {
+		audio.play();
+		isPlaying = true;
+	}
 });
