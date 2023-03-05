@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+     </div>
+
+     
+
+<audio id="my-audio">
+  <source src="/tibetan.mp3" type="audio/mpeg">
+</audio>        
+
+     <div class="container">
+        <svg viewBox="0 0 100 100">
+            <defs>
+                <linearGradient id="stroke-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#8B00FF" />
+                  <stop offset="100%" stop-color="#00BFFF" />
+                </linearGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="1" result="glow" />
+                    <feMerge>
+                      <feMergeNode in="glow" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+              </defs>
+          <circle cx="50" cy="50" r="45" fill="none" stroke="url(#stroke-gradient)" stroke-width="3" stroke-dasharray="283" stroke-dashoffset="0" id="circle" filter="url(#glow)"/>
+        </svg>
+        <div class="timer">
+            <p>25:00</p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button id="start"><i class="fa-solid fa-play fa"></i></i></button>
+        <button id="pause"><i class="fa-solid fa-pause fa"></i></button>
+        <button id="break"><i class="fa-solid fa-mug-saucer fa"></i></button>
+        <button id="repeat"><i class="fa-solid fa-rotate-right fa"></i></button>
+        
+      </div>
+
+      <button id="play-music"><i class="fa-solid fa-music"></i></button>
+
+       <script src="./js/index.js"></script>
+       <script src="https://kit.fontawesome.com/70a1a0c2da.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
